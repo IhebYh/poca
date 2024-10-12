@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poca/consts/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -10,6 +11,12 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const SafeArea(
+        child: Scaffold(
+      backgroundColor: AppColors.primary,
+      body: Center(
+        child: Text("Pocca."),
+      ),
+    ));
   }
 }
