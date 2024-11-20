@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:poca/consts/app_theme.dart';
-import 'package:poca/screens/SplashScreen.dart';
+import 'package:poca/screens/getStartedScreen.dart';
+import 'package:poca/screens/singInScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +18,13 @@ class MyApp extends StatelessWidget {
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
-        home: const SplashScreen());
+        initialRoute: '/',
+
+        // Define the named routes
+        routes: {
+          '/': (context) => const GetStartedScreen(),
+          '/signIn': (context) => LoginPage(),
+          // '/profile': (context) => ProfileScreen(),
+        });
   }
 }

@@ -33,7 +33,7 @@ class AppTheme {
                   borderRadius: BorderRadius.circular(30)))));
 
   static final darkTheme = ThemeData(
-      primaryColor: AppColors.primary,
+      primaryColor: AppColors.primaryDark,
       scaffoldBackgroundColor: AppColors.darkBackground,
       brightness: Brightness.dark,
       fontFamily: 'Inter',
