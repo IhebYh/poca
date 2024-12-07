@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:poca/consts/app_theme.dart';
+import 'package:poca/screens/SignUpScreens/signUpScreen.dart';
+import 'package:poca/screens/SignUpScreens/dateScreen.dart';
+import 'package:poca/screens/SignUpScreens/emailScreen.dart';
+import 'package:poca/screens/SignUpScreens/genderScreen.dart';
+import 'package:poca/screens/SignUpScreens/passwordScreen.dart';
 import 'package:poca/screens/getStartedScreen.dart';
 import 'package:poca/screens/singInScreen.dart';
 
@@ -24,6 +29,11 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => const GetStartedScreen(),
           '/signIn': (context) => LoginPage(),
+          '/emailScreen': (context) => emailScreen(),
+          '/passwordScreen': (context) => passwordScreen(),
+          '/dateScreen': (context) => dateScreen(),
+          '/genderScreen': (context) => genderScreen(),
+          '/signUpScreen': (context) => singUpScreen(),
           // '/profile': (context) => ProfileScreen(),
         });
   }

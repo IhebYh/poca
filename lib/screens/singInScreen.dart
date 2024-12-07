@@ -1,75 +1,80 @@
 import 'package:flutter/material.dart';
-import 'package:poca/consts/app_colors.dart';
+import 'package:get/get.dart';
+import 'package:poca/screens/homeScreen.dart';
 
-class LoginPage extends StatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
+class LoginController extends GetxController {
+  var username = ''.obs;
+  var password = ''.obs;
+  var errorMessage = ''.obs;
 
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  bool _isLoading = false;
-  String _errorMessage = '';
-
-  void _login() async {
-    setState(() {
-      _isLoading = true;
-      _errorMessage = '';
-    });
+  void login() async {
+    errorMessage.value = ''; // Clear previous error message
 
     // Simulate a network request
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
-    if (_usernameController.text == 'admin' &&
-        _passwordController.text == 'password') {
-      // Successful login
-      setState(() {});
-      // Navigate to another screen or perform other actions
+    if (username.value == 'admin' && password.value == 'password') {
+      // Successful login, navigate to HomeScreen
+      Get.off(() =>
+          HomeScreen()); // Use Get.off to remove the login page from the navigation stack
     } else {
       // Failed login
-      setState(() {
-        _errorMessage = 'Invalid username or password';
-      });
+      errorMessage.value = 'Invalid username or password';
     }
   }
+}
+
+class LoginPage extends StatelessWidget {
+  final LoginController _controller =
+      Get.put(LoginController()); // Create and initialize the controller
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: _usernameController,
-                decoration: const InputDecoration(labelText: 'Username'),
-              ),
-              TextField(
-                controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(labelText: 'Password'),
-              ),
-              const SizedBox(height: 20),
-              if (_errorMessage.isNotEmpty)
-                Padding(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Username input field
+            Obx(() => TextField(
+                  onChanged: (value) => _controller.username.value =
+                      value, // Update username in controller
+                  decoration: const InputDecoration(labelText: 'Username'),
+                )),
+            // Password input field
+            Obx(() => TextField(
+                  onChanged: (value) => _controller.password.value =
+                      value, // Update password in controller
+                  obscureText: true,
+                  decoration: const InputDecoration(labelText: 'Password'),
+                )),
+            const SizedBox(height: 20),
+            // Error message display
+            Obx(() {
+              if (_controller.errorMessage.value.isNotEmpty) {
+                return Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(
-                    _errorMessage,
+                    _controller.errorMessage.value,
                     style: const TextStyle(color: Colors.red),
                   ),
-                ),
-              const SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: _login,
-                child: const Text('Login'),
-              ),
-            ],
-          ),
-        ));
+                );
+              }
+              return SizedBox.shrink(); // Return an empty widget if no error
+            }),
+            const SizedBox(height: 20.0),
+            // Login button
+            ElevatedButton(
+              onPressed: _controller.login,
+              child: const Text('Login'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
