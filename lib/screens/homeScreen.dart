@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; // Import GetX
+import 'package:get/get.dart';
+import 'package:poca/screens/widgets/homeWidget.dart'; // Import GetX
 
 // Controller to manage state for HomeScreen
 class HomeController extends GetxController {
@@ -15,9 +16,9 @@ class HomeScreen extends StatelessWidget {
     final HomeController _controller = Get.put(HomeController());
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Screen'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Home Screen'),
+      // ),
       bottomNavigationBar: Obx(() => NavigationBar(
             selectedIndex:
                 _controller.selectedIndex.value, // Bind selected index
@@ -36,7 +37,7 @@ class HomeScreen extends StatelessWidget {
         // Based on the selected index, display content
         switch (_controller.selectedIndex.value) {
           case 0:
-            return Center(child: const Text("Home Screen Content"));
+            return HomeWidget();
           case 1:
             return Center(child: const Text("Search Screen Content"));
           case 2:

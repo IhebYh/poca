@@ -77,6 +77,7 @@ class GetStartedScreen extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   // Handle Login action here
+                  Get.toNamed('/signIn');
                   print('Log in');
                 },
                 child: const Text("Log in"),

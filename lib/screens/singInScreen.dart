@@ -39,21 +39,21 @@ class LoginPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Username input field
-            Obx(() => TextField(
-                  onChanged: (value) => _controller.username.value =
-                      value, // Update username in controller
-                  decoration: const InputDecoration(labelText: 'Username'),
-                )),
-            // Password input field
-            Obx(() => TextField(
-                  onChanged: (value) => _controller.password.value =
-                      value, // Update password in controller
-                  obscureText: true,
-                  decoration: const InputDecoration(labelText: 'Password'),
-                )),
+            // Username input field (no need for Obx, as it doesn't change from outside)
+            TextField(
+              onChanged: (value) => _controller.username.value =
+                  value, // Update username in controller
+              decoration: const InputDecoration(labelText: 'Username'),
+            ),
+            // Password input field (no need for Obx, as it doesn't change from outside)
+            TextField(
+              onChanged: (value) => _controller.password.value =
+                  value, // Update password in controller
+              obscureText: true,
+              decoration: const InputDecoration(labelText: 'Password'),
+            ),
             const SizedBox(height: 20),
-            // Error message display
+            // Error message display (wrap with Obx as it's dependent on an observable variable)
             Obx(() {
               if (_controller.errorMessage.value.isNotEmpty) {
                 return Padding(

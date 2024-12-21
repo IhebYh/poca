@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart'; // Import GetX package
 import 'package:poca/consts/app_theme.dart';
 import 'package:poca/screens/SignUpScreens/signUpScreen.dart';
 import 'package:poca/screens/SignUpScreens/dateScreen.dart';
@@ -15,26 +16,26 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system,
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/',
+    return GetMaterialApp(
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
 
-        // Define the named routes
-        routes: {
-          '/': (context) => const GetStartedScreen(),
-          '/signIn': (context) => LoginPage(),
-          '/emailScreen': (context) => emailScreen(),
-          '/passwordScreen': (context) => passwordScreen(),
-          '/dateScreen': (context) => dateScreen(),
-          '/genderScreen': (context) => genderScreen(),
-          '/signUpScreen': (context) => singUpScreen(),
-          // '/profile': (context) => ProfileScreen(),
-        });
+      // Define the named routes
+      getPages: [
+        GetPage(name: '/', page: () => const GetStartedScreen()),
+        GetPage(name: '/signIn', page: () => LoginPage()),
+        GetPage(name: '/emailScreen', page: () => emailScreen()),
+        GetPage(name: '/passwordScreen', page: () => passwordScreen()),
+        GetPage(name: '/dateScreen', page: () => dateScreen()),
+        GetPage(name: '/genderScreen', page: () => genderScreen()),
+        GetPage(name: '/signUpScreen', page: () => singUpScreen()),
+        // Add any other screens here
+      ],
+    );
   }
 }
